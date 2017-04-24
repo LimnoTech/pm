@@ -43,12 +43,13 @@ public class PM_Panel extends JPanel implements ActionListener, ChangeListener {
 
 		// By year radiobutton and spinner
 
-		rb1.setSelected(true);
+		rb1.setSelected(false);
 		bg.add(rb1);
 		rb1.addActionListener(this);
 		h.add(rb1);
 
 		sp = new JSpinner();
+		sp.setEnabled(false);
 		ResultUtils.SetMonthModelAndIndex(sp, 9, null, false);
 		sp.addChangeListener(this);
 		h.add(sp);
@@ -56,6 +57,7 @@ public class PM_Panel extends JPanel implements ActionListener, ChangeListener {
 
 		// By station radiobutton and combo box
 
+		rb2.setSelected(true);
 		bg.add(rb2);
 		rb2.addActionListener(this);
 		h.add(rb2);
@@ -65,7 +67,7 @@ public class PM_Panel extends JPanel implements ActionListener, ChangeListener {
 
 		sList = new JComboBox<String>(bParts);
 		sList.setSelectedIndex(0);
-		sList.setEnabled(false);
+		sList.setEnabled(true);
 		sList.addActionListener(this);
 		h.add(sList);
 		h.add(Box.createRigidArea(new Dimension(20, 20)));
@@ -88,30 +90,43 @@ public class PM_Panel extends JPanel implements ActionListener, ChangeListener {
 		// Build panel
 
 		this.add(h, BorderLayout.NORTH);
-		cp = new ChartPanel2((String) sList.getSelectedItem(), (String) cList.getSelectedItem(),
-				(String) sp.getValue());
+		cp = new ChartPanel2();
 		this.add(cp, BorderLayout.CENTER);
+		updateCharts();
+
 	}
 
 	public void actionPerformed(ActionEvent e) {
-
 		if (e.getSource() instanceof JRadioButton) {
 			JRadioButton rb = (JRadioButton) e.getSource();
 
 			if (rb.isSelected()) {
 				sp.setEnabled(rb.getText().equals("By Month"));
 				sList.setEnabled(!sp.isEnabled());
+				updateCharts();
 			}
-		} else if (e.getSource() instanceof JComboBox) {
-			cp.setTitle((String) sList.getSelectedItem());
-			cp.invalidate();
+		} else if ((e.getSource() instanceof JComboBox) || (e.getSource() instanceof JSpinner)) {
+
+			updateCharts();
 		}
 
 	}
 
+	private void updateCharts() {
+		if (sp.isEnabled())
+			cp.resetCharts("", (String) cList.getSelectedItem(), (String) sp.getValue(), false);
+		else
+			cp.resetCharts((String) sList.getSelectedItem(), (String) cList.getSelectedItem(), "", false);
+
+		invalidate();
+		repaint();
+
+	}
+
 	@Override
-	public void stateChanged(ChangeEvent arg0) {
-		// TODO Auto-generated method stub
+	public void stateChanged(ChangeEvent e) {
+		if (e.getSource() instanceof JSpinner)
+			updateCharts();
 
 	}
 }

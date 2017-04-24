@@ -14,8 +14,7 @@ import javax.swing.JOptionPane;
 
 import org.apache.log4j.Logger;
 
-import gov.ca.water.calgui.results.RBListItem;
-import gov.ca.water.calgui.results.ResultUtils;
+import gov.ca.water.calgui.bo.RBListItemBO;
 import hec.heclib.dss.HecDss;
 import hec.heclib.util.HecTime;
 import hec.io.TimeSeriesContainer;
@@ -724,7 +723,7 @@ public class DSSGrabber1 {
 			for (int i = 0; i < scenarios; i++) {
 				// String scenarioName = (String)
 				// lstScenarios.getModel().getElementAt(i);
-				String scenarioName = ((RBListItem) lstScenarios.getModel().getElementAt(i)).toString();
+				String scenarioName = ((RBListItemBO) lstScenarios.getModel().getElementAt(i)).toString();
 
 				if (!baseName.equals(scenarioName)) {
 					j = j + 1;
@@ -971,7 +970,7 @@ public class DSSGrabber1 {
 
 						results[month][i] = new TimeSeriesContainer();
 
-						if (month == 12) {
+						if ((month == 12) && (annualTAFs != null)) {
 
 							// Annual totals - grab from annualTAFs
 							n = annualTAFs[i].length;

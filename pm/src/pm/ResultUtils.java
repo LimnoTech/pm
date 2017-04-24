@@ -30,8 +30,8 @@ import org.swixml.SwingEngine;
 
 import calsim.app.AppUtils;
 import calsim.app.Project;
-import gov.ca.water.calgui.results.DisplayFrame;
-import gov.ca.water.calgui.results.Report.PathnameMap;
+import gov.ca.water.calgui.presentation.DisplayFrame;
+import gov.ca.water.calgui.presentation.Report.PathnameMap;
 import vista.db.dss.DSSUtil;
 import vista.report.TSMath;
 import vista.set.Constants;
