@@ -123,6 +123,10 @@ public class PM_Panel extends JPanel implements ActionListener, ChangeListener {
 
 	}
 
+	public ChartPanel2 getCP() {
+		return cp;
+	}
+
 	@Override
 	public void stateChanged(ChangeEvent e) {
 		if (e.getSource() instanceof JSpinner)

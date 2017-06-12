@@ -23,9 +23,7 @@ public class PM_Demo {
 
 		// Second panel
 
-		JPanel p2 = new JPanel();
-		p2.setName("SWP");
-		p2.setLayout(new BorderLayout());
+		JPanel p2 = new BarChartPanel(p1.getCP());
 
 		JScrollPane scrollPane = new JScrollPane((Component) p1, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);

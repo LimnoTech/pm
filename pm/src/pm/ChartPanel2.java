@@ -68,6 +68,10 @@ public class ChartPanel2 extends JPanel {
 		}
 	}
 
+	public TimeSeries[][] getSeries() {
+		return series;
+	}
+
 	private int getMonth(String month) {
 		int i = "janfebmaraprmayjunjulaugsepoctnovdec".indexOf(month.toLowerCase()) / 3;
 		return i;
@@ -101,7 +105,7 @@ public class ChartPanel2 extends JPanel {
 		super();
 
 		readManyTimeSeries();
-		this.setLayout(new GridLayout(0, 2));
+		this.setLayout(new GridLayout(0, 4));
 		// Set up time series charts
 		for (int i = 0; i < 12; i++) {
 			dataSeries[i] = new XYSeries("");
